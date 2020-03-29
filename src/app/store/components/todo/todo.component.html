@@ -1,0 +1,26 @@
+<div class="todo">
+  <div>
+    <form (ngSubmit)="addItem()">
+      <label>
+        <input type="text" [(ngModel)]="newTodoItem.name" placeholder="Item" name="itemName"/>
+      </label>
+      <button type="submit" class="todo__buttons save">Save</button>
+    </form>
+    <div class="todo__item"
+         *ngFor="let todo of todoItems$ | async">
+      <div class="todo__item__name">
+        <label>
+          <input type="checkbox"
+                 (click)="completeTodo(todo)"
+                 [(ngModel)]="todo.checked">
+        </label>
+        <span [class.completed]="todo.checked">
+          {{ todo.name }}
+        </span>
+      </div>
+      <div>
+        <button class="todo__buttons remove" (click)="deleteTodo(todo.id)">remove</button>
+      </div>
+    </div>
+  </div>
+</div>
